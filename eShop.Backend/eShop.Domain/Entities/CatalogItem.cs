@@ -13,7 +13,9 @@ namespace eShop.Domain.Entities
         public string Description { get; set; }
         public string PictureFileName { get; set; }
         public Guid CatalogBrandId { get; set; }
+        public CatalogBrand CatalogBrand { get; set; }
         public Guid CatalogTypeId { get; set; }
+        public CatalogType CatalogType { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }
     }
