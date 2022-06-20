@@ -1,4 +1,5 @@
-﻿using eShop.Persistance.EntityTypeConfigurations;
+﻿using eShop.Domain.Entities;
+using eShop.Persistance.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,5 +27,11 @@ namespace eShop.Persistance
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<CatalogBrand> CatalogBrands { get; set; }
+        public DbSet<CatalogType> CatalogTypes { get; set; }
+        public DbSet<CatalogItem> CatalogItems { get; set; } 
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<CustomerBasket> CustomerBaskets { get; set; }
     }
 }
