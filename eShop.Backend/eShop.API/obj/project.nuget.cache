@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1MG2Xoj2sUvOxUa6x1gqwknYnz0zmZM2hEat56sQAl39zEEotE0uN2zGU6Sz74Ch5Vb93aBvRF9Qc0HyPsxaAg==",
+  "dgSpecHash": "4kkpGidy0skeX8UQ2KvQOU9yEcgHTS4QZQNpi+uectrddql2BR31KxFaERp0+V2TUCjRCyInY/n7e04XzHHS1A==",
   "success": true,
   "projectFilePath": "E:\\dotNET apps\\eShop\\eShop.Backend\\eShop.API\\eShop.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\polta\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.6\\microsoft.data.sqlite.core.6.0.6.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.6\\microsoft.entityframeworkcore.abstractions.6.0.6.nupkg.sha512",
@@ -34,6 +35,7 @@
     "C:\\Users\\polta\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\polta\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",

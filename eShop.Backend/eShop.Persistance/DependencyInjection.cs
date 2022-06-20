@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using eShop.Application.Interfaces;
+using eShop.Persistance.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +19,7 @@ namespace eShop.Persistance
             {
                 options.UseSqlite(configuration.GetConnectionString("DbConnection"));
             });
+            services.AddScoped<ICatalogService, CatalogService>();
         }
     }
 }

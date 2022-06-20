@@ -15,4 +15,8 @@
     <ProjectReference Include="..\eShop.Persistance\eShop.Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pictures\" />
+  </ItemGroup>
+
 </Project>

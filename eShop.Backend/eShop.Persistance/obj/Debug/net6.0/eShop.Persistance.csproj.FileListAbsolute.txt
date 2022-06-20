@@ -13,3 +13,5 @@ E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Pers
 E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\refint\eShop.Persistance.dll
 E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.pdb
 E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\ref\eShop.Persistance.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Application.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Application.pdb

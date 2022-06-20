@@ -9,6 +9,8 @@ namespace eShop.Persistance.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<CatalogItem> builder)
         {
             builder.HasKey(item => item.Id);
+            builder.Property(item => item.PictureFileName)
+                .IsRequired(false);
         }
     }
 }

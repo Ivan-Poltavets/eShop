@@ -9,7 +9,7 @@ namespace eShop.Persistance.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<CustomerBasket> builder)
         {
             builder.HasKey(basket => basket.UserId);
-            //builder.Ignore(basket => basket.BasketItems);
+            
         }
     }
 }
