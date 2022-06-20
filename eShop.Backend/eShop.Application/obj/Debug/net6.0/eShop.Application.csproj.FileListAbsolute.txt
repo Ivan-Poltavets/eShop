@@ -1,0 +1,15 @@
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\bin\Debug\net6.0\eShop.Application.deps.json
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\bin\Debug\net6.0\eShop.Application.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\bin\Debug\net6.0\eShop.Application.pdb
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\bin\Debug\net6.0\eShop.Domain.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\bin\Debug\net6.0\eShop.Domain.pdb
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.csproj.AssemblyReference.cache
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.AssemblyInfoInputs.cache
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.AssemblyInfo.cs
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.csproj.CoreCompileInputs.cache
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.csproj.CopyComplete
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\refint\eShop.Application.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\eShop.Application.pdb
+E:\dotNET apps\eShop\eShop.Backend\eShop.Application\obj\Debug\net6.0\ref\eShop.Application.dll

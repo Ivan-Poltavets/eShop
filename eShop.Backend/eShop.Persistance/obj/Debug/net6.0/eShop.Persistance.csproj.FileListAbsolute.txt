@@ -1,0 +1,15 @@
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Persistance.deps.json
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Persistance.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Persistance.pdb
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Domain.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\bin\Debug\net6.0\eShop.Domain.pdb
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.csproj.AssemblyReference.cache
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.GeneratedMSBuildEditorConfig.editorconfig
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.AssemblyInfoInputs.cache
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.AssemblyInfo.cs
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.csproj.CoreCompileInputs.cache
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.csproj.CopyComplete
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\refint\eShop.Persistance.dll
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\eShop.Persistance.pdb
+E:\dotNET apps\eShop\eShop.Backend\eShop.Persistance\obj\Debug\net6.0\ref\eShop.Persistance.dll

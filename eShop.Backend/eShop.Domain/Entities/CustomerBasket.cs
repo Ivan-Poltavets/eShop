@@ -9,6 +9,6 @@ namespace eShop.Domain.Entities
     public class CustomerBasket
     {
         public Guid UserId { get; set; }
-        public List<BasketItem> Items { get; set; }
+        public List<BasketItem> BasketItems { get; set; }
     }
 }

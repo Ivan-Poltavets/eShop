@@ -9,7 +9,7 @@ namespace eShop.Persistance.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<BasketItem> builder)
         {
             builder.HasKey(item => item.Id);
-            builder.Property(item => item.ProductId)
+            builder.Property(item => item.CatalogItemId)
                 .IsRequired(true);
         }
     }
