@@ -8,6 +8,7 @@ namespace eShop.Persistance.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<CustomerBasket> builder)
         {
+            builder.HasKey(basket => basket.Id);
             builder.HasKey(basket => basket.UserId);
             
         }

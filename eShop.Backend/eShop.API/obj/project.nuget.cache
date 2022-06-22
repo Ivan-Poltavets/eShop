@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "4kkpGidy0skeX8UQ2KvQOU9yEcgHTS4QZQNpi+uectrddql2BR31KxFaERp0+V2TUCjRCyInY/n7e04XzHHS1A==",
+  "dgSpecHash": "UP2Jid2OliucZWXQT3MdDtcUNPOtlujVOCIWAt0qeL1S35hDKufKCcQNPkbOsiMy+QvmS/zNqQYZe6obU1uEqg==",
   "success": true,
   "projectFilePath": "E:\\dotNET apps\\eShop\\eShop.Backend\\eShop.API\\eShop.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\polta\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.6\\microsoft.data.sqlite.core.6.0.6.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",

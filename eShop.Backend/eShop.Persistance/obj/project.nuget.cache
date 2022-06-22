@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0tWa1f80nkp9U/6uno4HVFbo8ao72LnOFQ6BgA75pXOlj+ETTINEiOFTAIO9uuaG+K6tQxYx7CBsdTgRkn2lNA==",
+  "dgSpecHash": "/oVIC/XTmuhUg72Abzh5Ric9R2rtMK0IEkOZziKK5rerrDb19a5X0oY48yG5dicg1ivfPK8GG9KDz9pnh7j7YQ==",
   "success": true,
   "projectFilePath": "E:\\dotNET apps\\eShop\\eShop.Backend\\eShop.Persistance\\eShop.Persistance.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\polta\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.6\\microsoft.data.sqlite.core.6.0.6.nupkg.sha512",
     "C:\\Users\\polta\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",

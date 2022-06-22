@@ -1,2 +1,6 @@
-*.db-shm
 *.db-wal
+.vs/
+obj/
+bin/
+*.db-shm
+

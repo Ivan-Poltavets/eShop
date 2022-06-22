@@ -8,6 +8,7 @@ namespace eShop.Domain.Entities
 {
     public class CustomerBasket
     {
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public List<BasketItem> BasketItems { get; set; }
     }
