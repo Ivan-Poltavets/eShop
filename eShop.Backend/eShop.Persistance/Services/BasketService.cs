@@ -10,19 +10,16 @@ namespace eShop.Persistance.Services
     public class BasketService : IBasketService
     {
         private readonly ApplicationDbContext _context;
-        private IHttpContextAccessor _httpContextAccessor;
         public BasketService(
-            ApplicationDbContext context,
-            IHttpContextAccessor httpContextAccessor)
+            ApplicationDbContext context)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<BasketItem> AddItem(BasketItemDto basketItemDto)
+        public async Task<BasketItem> AddItem(BasketItemDto basketItemDto, Guid userId)
         {
-            var id = _httpContextAccessor.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var basket = await GetBasketById(Guid.Parse(id));
+            //var id = _httpContextAccessor.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var basket = await GetBasketById(userId);
             var product = await _context.CatalogItems.FirstOrDefaultAsync(x => x.Id == basketItemDto.CatalogItemId);
 
             var item = new BasketItem
@@ -45,6 +42,17 @@ namespace eShop.Persistance.Services
         public async Task<CustomerBasket> GetBasketById(Guid userId)
         {
             var basket = await _context.CustomerBaskets.FirstOrDefaultAsync(x => x.UserId == userId);
+            if(basket == null)
+            {
+                basket = new CustomerBasket
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId
+                };
+                await _context.CustomerBaskets.AddAsync(basket);
+                _context.SaveChanges();
+                
+            }
             return basket;
         }
 
