@@ -87,6 +87,16 @@ namespace eShop.Tests.Common
                     UserId = UserBId
                 });
 
+            context.BasketItems.Add(
+                new BasketItem
+                {
+                    Id = Guid.Parse("A0056A6C-FB3C-4BB1-96FE-227A056A7718"),
+                    CatalogItemId = Guid.Parse("4EE0843C-01AB-4B22-888A-9AED92AB12FD"),
+                    Quantity = 1,
+                    UnitPrice = 23,
+                    TotalPrice = 23,
+                    CustomerBasketId = Guid.Parse("B988A8D3-C9E9-43A0-8164-408F78DEBF5C")
+                });
             context.SaveChanges();
             return context;
         }

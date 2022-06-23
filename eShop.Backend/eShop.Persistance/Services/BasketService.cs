@@ -56,11 +56,11 @@ namespace eShop.Persistance.Services
             return basket;
         }
 
-        public async Task<BasketItem> RemoveItem(BasketItemDto basketItemDto, Guid userId)
+        public async Task<BasketItem> RemoveItem(Guid catalogItemId, Guid userId)
         {
             var basket = await GetBasketById(userId);
             var remove = await _context.BasketItems
-                .FirstOrDefaultAsync(x => x.CustomerBasketId == basket.Id && x.CatalogItemId == basketItemDto.CatalogItemId);
+                .FirstOrDefaultAsync(x => x.CustomerBasketId == basket.Id && x.CatalogItemId == catalogItemId);
             _context.Remove(remove);
             await _context.SaveChangesAsync();
             return remove;
