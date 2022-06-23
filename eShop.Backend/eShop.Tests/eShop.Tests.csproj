@@ -28,8 +28,4 @@
     <ProjectReference Include="..\eShop.Persistance\eShop.Persistance.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Basket\" />
-  </ItemGroup>
-
 </Project>
