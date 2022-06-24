@@ -9,7 +9,8 @@ namespace eShop.Persistance.Services
     {
         private readonly ApplicationDbContext _context;
 
-        public CatalogService(ApplicationDbContext context) => _context = context;
+        public CatalogService(ApplicationDbContext context) 
+            => _context = context;
 
         public async Task<CatalogBrand> CreateBrand(CatalogBrandDto catalogBrandDto)
         {

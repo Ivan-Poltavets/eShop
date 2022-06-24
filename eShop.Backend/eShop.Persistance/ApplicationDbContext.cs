@@ -19,6 +19,7 @@ namespace eShop.Persistance
             modelBuilder.ApplyConfiguration(new CatalogBrandConfiguration());
             modelBuilder.ApplyConfiguration(new CatalogItemConfiguration());
             modelBuilder.ApplyConfiguration(new CatalogTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -28,5 +29,6 @@ namespace eShop.Persistance
         public DbSet<CatalogItem> CatalogItems { get; set; } 
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<CustomerBasket> CustomerBaskets { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

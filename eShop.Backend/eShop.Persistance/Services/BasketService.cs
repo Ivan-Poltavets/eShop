@@ -10,11 +10,9 @@ namespace eShop.Persistance.Services
     public class BasketService : IBasketService
     {
         private readonly ApplicationDbContext _context;
-        public BasketService(
-            ApplicationDbContext context)
-        {
-            _context = context;
-        }
+
+        public BasketService(ApplicationDbContext context)
+            => _context = context;
 
         public async Task<BasketItem> AddItem(BasketItemDto basketItemDto, Guid userId)
         {
