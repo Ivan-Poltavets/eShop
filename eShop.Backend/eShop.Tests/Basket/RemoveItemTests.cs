@@ -1,5 +1,4 @@
 ﻿using eShop.Persistance.Services;
-using eShop.Tests.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace eShop.Tests.Basket

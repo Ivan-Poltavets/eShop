@@ -12,11 +12,26 @@ namespace eShop.Persistance.Services
         public OrderService(ApplicationDbContext context)
             => _context = context;
 
-        public async Task CreateAsync(OrderDto orderDto)
+        public async Task<Order> CreateAsync(OrderDto orderDto, List<OrderItemDto> orderItemDtos)
         {
-            var order = new Order(orderDto.Items, orderDto.UserId);
+            int totalPrice = 0;
+            foreach(var item in orderItemDtos)
+            {
+                totalPrice += item.TotalPrice;
+            }
+
+            var order = new Order(orderDto.UserId, totalPrice);
+            var orderItems = new List<OrderItem>();
+            foreach(var item in orderItemDtos)
+            {
+                orderItems.Add(new OrderItem(item.Name, item.UnitPrice, item.Quantity, item.TotalPrice, order.Id));
+            }
+
             await _context.Orders.AddAsync(order);
+            _context.OrderItems.AddRange(orderItems);
             await _context.SaveChangesAsync();
+
+            return order;
         }
 
         public async Task<Order> GetOrder(Guid orderId, Guid userId)

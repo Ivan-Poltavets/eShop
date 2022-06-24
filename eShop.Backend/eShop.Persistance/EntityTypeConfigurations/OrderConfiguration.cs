@@ -11,8 +11,6 @@ namespace eShop.Persistance.EntityTypeConfigurations
             builder.HasKey(x => x.Id);
             builder.HasKey(x => x.UserId);
 
-            builder.Property(x => x.Items)
-                .IsRequired(true);
         }
     }
 }

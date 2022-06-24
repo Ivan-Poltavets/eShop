@@ -1,5 +1,4 @@
-﻿using eShop.Tests.Common;
-using eShop.Persistance.Services;
+﻿using eShop.Persistance.Services;
 using eShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
