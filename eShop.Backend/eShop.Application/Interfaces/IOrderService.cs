@@ -7,7 +7,7 @@ namespace eShop.Application.Interfaces
     {
         public Task<Order> CreateAsync(OrderDto orderDto, List<OrderItemDto> orderItemDtos);
         public Task<List<Order>> GetOrders(Guid userId);
-        public Task<Order> GetOrder(Guid orderId, Guid userId);
+        public Task<List<OrderItem>> GetOrder(Guid orderId, Guid userId);
         
     }
 }

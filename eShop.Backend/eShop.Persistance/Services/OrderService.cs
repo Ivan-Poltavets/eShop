@@ -34,11 +34,13 @@ namespace eShop.Persistance.Services
             return order;
         }
 
-        public async Task<Order> GetOrder(Guid orderId, Guid userId)
+        public async Task<List<OrderItem>> GetOrder(Guid orderId, Guid userId)
         {
-            var order = await _context.Orders
-                .SingleOrDefaultAsync(x => x.Id == orderId && x.UserId == userId);
-            return order;
+            var items = await _context.OrderItems
+                .Where(x => x.OrderId == orderId)
+                .ToListAsync();
+
+            return items;
         }
 
         public async Task<List<Order>> GetOrders(Guid userId)

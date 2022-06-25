@@ -97,6 +97,21 @@ namespace eShop.Tests.Common
                     TotalPrice = 23,
                     CustomerBasketId = Guid.Parse("B988A8D3-C9E9-43A0-8164-408F78DEBF5C")
                 });
+
+            context.Orders.AddRange(
+                new Order
+                {
+                    Id = Guid.Parse("A453068B-28A2-43B5-96F4-3CA6B0E4980A"),
+                    UserId = UserAId,
+                    TotalPrice = 11111
+                },
+                new Order
+                {
+                    Id = Guid.Parse("41A4E89F-929B-49AC-B3BD-2FFF0D19C160"),
+                    UserId = UserAId,
+                    TotalPrice = 22222
+                }
+                );
             context.SaveChanges();
             return context;
         }

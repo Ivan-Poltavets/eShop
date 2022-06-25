@@ -9,8 +9,6 @@ namespace eShop.Persistance.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasKey(x => x.UserId);
-
         }
     }
 }

@@ -4,7 +4,7 @@ using eShop.Domain.Entities;
 using eShop.Persistance.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShop.Tests.Order
+namespace eShop.Tests.OrderServices
 {
     public class CreateOrderTests : TestBase
     {

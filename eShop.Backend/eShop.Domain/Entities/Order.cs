@@ -6,7 +6,7 @@
         public Guid UserId { get; set; }
         public int TotalPrice { get; set; }
 
-        private Order()
+        public Order()
         {
 
         }
