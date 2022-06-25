@@ -112,6 +112,28 @@ namespace eShop.Tests.Common
                     TotalPrice = 22222
                 }
                 );
+            
+
+            context.OrderItems.AddRange(
+                new OrderItem
+                {
+                    Id = Guid.Parse("AAB5A0EC-1E3C-4875-99EA-1518A04FD0DE"),
+                    OrderId = Guid.Parse("A453068B-28A2-43B5-96F4-3CA6B0E4980A"),
+                    TotalPrice = 11111,
+                    Quantity = 1,
+                    UnitPrice = 11111,
+                    Name = "name1"
+                },
+                new OrderItem
+                {
+                    Id = Guid.Parse("7DA8798B-E35C-480E-8C2D-A4CF8DA28696"),
+                    OrderId = Guid.Parse("A453068B-28A2-43B5-96F4-3CA6B0E4980A"),
+                    TotalPrice = 22222,
+                    Quantity = 2,
+                    UnitPrice = 11111,
+                    Name = "name2"
+                }
+                );
             context.SaveChanges();
             return context;
         }

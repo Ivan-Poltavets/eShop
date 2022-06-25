@@ -9,6 +9,11 @@
         public int TotalPrice { get; set; }
         public Guid OrderId { get; set; }
 
+        public OrderItem()
+        {
+
+        }
+
         public OrderItem(string name, int unitPrice, int quantity, int totalPrice, Guid orderId)
         {
             Id = Guid.NewGuid();
