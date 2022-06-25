@@ -15,6 +15,8 @@ namespace eShop.Persistance
                 options.UseSqlite(configuration.GetConnectionString("DbConnection"));
             });
             services.AddScoped<ICatalogService, CatalogService>();
+            services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
     }
 }

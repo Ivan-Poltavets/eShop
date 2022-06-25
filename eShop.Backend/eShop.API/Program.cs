@@ -6,6 +6,8 @@ builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
+builder.Services.AddAuthentication();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
@@ -29,7 +31,9 @@ using(var scope = app.Services.CreateScope())
     }
 }
 app.UseHttpsRedirection();
+app.UseCors();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
