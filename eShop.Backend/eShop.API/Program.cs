@@ -26,7 +26,7 @@ builder.Services.AddAuthentication(config =>
 })
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://localhost:/";
+        options.Authority = "https://localhost:50411/";
         options.Audience = "eShopWebAPI";
         options.RequireHttpsMetadata = false;
     });

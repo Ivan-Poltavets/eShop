@@ -5,8 +5,9 @@ namespace eShop.Application.Interfaces
 {
     public interface IBasketService
     {
-        public Task<BasketItem> AddItem(BasketItemDto basketItemDto, Guid userId);
-        public Task<BasketItem> RemoveItem(Guid catalogItemId, Guid userId);
-        public Task<CustomerBasket> GetBasketById(Guid userId);
+        public Task<BasketItem> AddItemAsync(BasketItemDto basketItemDto, Guid userId);
+        public Task<BasketItem> RemoveItemAsync(Guid basketItemId, Guid userId);
+        public Task<CustomerBasket> GetBasketByIdAsync(Guid userId);
+        public Task<List<BasketItem>> GetBasketItemsAsync(Guid userId);
     }
 }

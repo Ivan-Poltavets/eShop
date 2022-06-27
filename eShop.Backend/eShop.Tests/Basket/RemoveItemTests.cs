@@ -10,8 +10,8 @@ namespace eShop.Tests.Basket
         {
             var basketService = new BasketService(Context);
             Guid catalogItemId = Guid.Parse("4EE0843C-01AB-4B22-888A-9AED92AB12FD");
-            var basket = await basketService.GetBasketById(ContextSeed.UserBId);
-            await basketService.RemoveItem(catalogItemId, ContextSeed.UserBId);
+            var basket = await basketService.GetBasketByIdAsync(ContextSeed.UserBId);
+            await basketService.RemoveItemAsync(catalogItemId, ContextSeed.UserBId);
 
             Assert.Null(await Context.BasketItems
                 .SingleOrDefaultAsync(x => x.CatalogItemId == catalogItemId && x.CustomerBasketId == basket.Id));

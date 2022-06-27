@@ -10,7 +10,7 @@ namespace eShop.Tests.Basket
         public async Task GetBasketById_Success()
         {
             var basketService = new BasketService(Context);
-            var basket = basketService.GetBasketById(ContextSeed.UserAId);
+            var basket = basketService.GetBasketByIdAsync(ContextSeed.UserAId);
 
             Assert.NotNull(await Context.CustomerBaskets.SingleOrDefaultAsync(
                 x => x.UserId == ContextSeed.UserAId));
@@ -20,7 +20,7 @@ namespace eShop.Tests.Basket
         public async Task GetBasketById_ExistSuccess()
         {
             var basketService = new BasketService(Context);
-            var basket = basketService.GetBasketById(ContextSeed.UserBId);
+            var basket = basketService.GetBasketByIdAsync(ContextSeed.UserBId);
 
             Assert.NotNull(await Context.CustomerBaskets.SingleOrDefaultAsync(
                 x => x.UserId == ContextSeed.UserBId));

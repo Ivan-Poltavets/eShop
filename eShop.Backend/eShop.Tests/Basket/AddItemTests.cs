@@ -17,7 +17,7 @@ namespace eShop.Tests.Basket
                 CatalogItemId = catalogItemId,
                 Quantity = 1
             };
-            var result = await basketService.AddItem(basketItemDto, ContextSeed.UserBId);
+            var result = await basketService.AddItemAsync(basketItemDto, ContextSeed.UserBId);
             Assert.NotNull(await Context.BasketItems
                 .SingleOrDefaultAsync(x => x.CatalogItemId == result.CatalogItemId && x.Quantity == result.Quantity
                 && x.CustomerBasketId == result.CustomerBasketId));

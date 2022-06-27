@@ -12,7 +12,7 @@ namespace eShop.Persistance.Services
         public CatalogService(ApplicationDbContext context) 
             => _context = context;
 
-        public async Task<CatalogBrand> CreateBrand(CatalogBrandDto catalogBrandDto)
+        public async Task<CatalogBrand> CreateBrandAsync(CatalogBrandDto catalogBrandDto)
         {
             var catalogBrand = new CatalogBrand
             {
@@ -24,11 +24,11 @@ namespace eShop.Persistance.Services
             return catalogBrand;
         }
 
-        public async Task<CatalogItem> CreateItem(CreateCatalogItemDto catalogItemDto)
+        public async Task<CatalogItem> CreateItemAsync(CreateCatalogItemDto catalogItemDto)
         {
 
-            var catalogBrand = await FindBrandById(catalogItemDto.CatalogBrandId);
-            var catalogType = await FindTypeById(catalogItemDto.CatalogTypeId);
+            var catalogBrand = FindBrandById(catalogItemDto.CatalogBrandId);
+            var catalogType = FindTypeById(catalogItemDto.CatalogTypeId);
 
             var catalogItem = new CatalogItem
             {
@@ -48,7 +48,7 @@ namespace eShop.Persistance.Services
             return catalogItem;
         }
 
-        public async Task<CatalogType> CreateType(CatalogTypeDto catalogTypeDto)
+        public async Task<CatalogType> CreateTypeAsync(CatalogTypeDto catalogTypeDto)
         {
             var catalogType = new CatalogType
             {
@@ -69,7 +69,7 @@ namespace eShop.Persistance.Services
         public async Task<List<CatalogType>> GetTypesAsync()
             => await _context.CatalogTypes.ToListAsync();
 
-        public async Task<List<CatalogItem>> GetItemsByName(string name)
+        public async Task<List<CatalogItem>> GetItemsByNameAsync(string name)
         {
             var items = await _context.CatalogItems
                 .Where(item => item.Name.StartsWith(name))
@@ -78,7 +78,7 @@ namespace eShop.Persistance.Services
             return items;
         }
 
-        public async Task<List<CatalogItem>> GetItemsByBrand(string brandName)
+        public async Task<List<CatalogItem>> GetItemsByBrandAsync(string brandName)
         {
             var brands = await _context.CatalogBrands
                 .Where(brand => brand.BrandName.StartsWith(brandName))
@@ -94,7 +94,7 @@ namespace eShop.Persistance.Services
             return items;
         }
 
-        public async Task<List<CatalogItem>> GetItemsByType(string typeName)
+        public async Task<List<CatalogItem>> GetItemsByTypeAsync(string typeName)
         {
             var types = await _context.CatalogTypes
                 .Where(type => type.TypeName.StartsWith(typeName))
@@ -111,10 +111,10 @@ namespace eShop.Persistance.Services
         }
 
 
-        public async Task<CatalogBrand> FindBrandById(Guid id)
-            => await _context.CatalogBrands.FindAsync(id);
+        public  CatalogBrand FindBrandById(Guid id)
+            =>  _context.CatalogBrands.Find(id);
 
-        public async Task<CatalogType> FindTypeById(Guid id)
-            => await _context.CatalogTypes.FindAsync(id);
+        public  CatalogType FindTypeById(Guid id)
+            => _context.CatalogTypes.Find(id);
     }
 }

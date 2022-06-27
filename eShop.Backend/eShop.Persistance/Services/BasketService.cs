@@ -1,9 +1,7 @@
 ﻿using eShop.Application.Dto;
 using eShop.Application.Interfaces;
 using eShop.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace eShop.Persistance.Services
 {
@@ -14,11 +12,22 @@ namespace eShop.Persistance.Services
         public BasketService(ApplicationDbContext context)
             => _context = context;
 
-        public async Task<BasketItem> AddItem(BasketItemDto basketItemDto, Guid userId)
+        public async Task<BasketItem> AddItemAsync(BasketItemDto basketItemDto, Guid userId)
         {
-            //var id = _httpContextAccessor.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var basket = await GetBasketById(userId);
+            var basket = await GetBasketByIdAsync(userId);
             var product = await _context.CatalogItems.FirstOrDefaultAsync(x => x.Id == basketItemDto.CatalogItemId);
+
+            var exist = await _context.BasketItems.FirstOrDefaultAsync(x => x.CatalogItemId == basketItemDto.CatalogItemId
+            && x.CustomerBasketId == basket.Id);
+
+            if(exist != null)
+            {
+                exist.Quantity += 1;
+                _context.Update(exist);
+                _context.SaveChanges();
+
+                return exist;
+            }
 
             var item = new BasketItem
             {
@@ -37,7 +46,7 @@ namespace eShop.Persistance.Services
             return item;
         }
 
-        public async Task<CustomerBasket> GetBasketById(Guid userId)
+        public async Task<CustomerBasket> GetBasketByIdAsync(Guid userId)
         {
             var basket = await _context.CustomerBaskets.FirstOrDefaultAsync(x => x.UserId == userId);
             if(basket == null)
@@ -54,14 +63,23 @@ namespace eShop.Persistance.Services
             return basket;
         }
 
-        public async Task<BasketItem> RemoveItem(Guid catalogItemId, Guid userId)
+        public async Task<BasketItem> RemoveItemAsync(Guid basketItemId, Guid userId)
         {
-            var basket = await GetBasketById(userId);
+            var basket = await GetBasketByIdAsync(userId);
             var remove = await _context.BasketItems
-                .FirstOrDefaultAsync(x => x.CustomerBasketId == basket.Id && x.CatalogItemId == catalogItemId);
+                .FirstOrDefaultAsync(x => x.CustomerBasketId == basket.Id && x.Id == basketItemId);
             _context.Remove(remove);
             await _context.SaveChangesAsync();
             return remove;
+        }
+
+        public async Task<List<BasketItem>> GetBasketItemsAsync(Guid userId)
+        {
+            var basket = await GetBasketByIdAsync(userId);
+            var items = await _context.BasketItems
+                .Where(x => x.CustomerBasketId == basket.Id)
+                .ToListAsync();
+            return items;
         }
     } 
 }

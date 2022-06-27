@@ -34,7 +34,7 @@ namespace eShop.Persistance.Services
             return order;
         }
 
-        public async Task<List<OrderItem>> GetOrder(Guid orderId, Guid userId)
+        public async Task<List<OrderItem>> GetOrderAsync(Guid orderId, Guid userId)
         {
             var items = await _context.OrderItems
                 .Where(x => x.OrderId == orderId)
@@ -43,7 +43,7 @@ namespace eShop.Persistance.Services
             return items;
         }
 
-        public async Task<List<Order>> GetOrders(Guid userId)
+        public async Task<List<Order>> GetOrdersAsync(Guid userId)
         {
             var orders = await _context.Orders
                 .Where(x => x.UserId == userId)

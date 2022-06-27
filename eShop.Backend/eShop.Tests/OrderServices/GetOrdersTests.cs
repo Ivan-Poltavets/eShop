@@ -8,7 +8,7 @@ namespace eShop.Tests.OrderServices
         public async Task GetOrders_Success()
         {
             var orderService = new OrderService(Context);
-            var orders = await orderService.GetOrders(ContextSeed.UserAId);
+            var orders = await orderService.GetOrdersAsync(ContextSeed.UserAId);
 
             Assert.NotNull(orders);
         }
