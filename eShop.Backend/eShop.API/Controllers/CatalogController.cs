@@ -1,14 +1,12 @@
 ﻿using eShop.Application.Dto;
 using eShop.Application.Interfaces;
-using eShop.Persistance;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace eShop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class CatalogController : ControllerBase
     {
         private readonly ICatalogService _catalogService;
