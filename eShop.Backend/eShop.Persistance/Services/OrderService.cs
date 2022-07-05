@@ -12,25 +12,33 @@ namespace eShop.Persistance.Services
         public OrderService(ApplicationDbContext context)
             => _context = context;
 
-        public async Task<Order> CreateAsync(OrderDto orderDto, List<OrderItemDto> orderItemDtos)
+        public async Task<Order> CreateAsync(Guid userId)
         {
-            int totalPrice = 0;
-            foreach(var item in orderItemDtos)
+            var basketId = (await _context.CustomerBaskets
+                .SingleOrDefaultAsync(x => x.UserId == userId))?.Id;
+
+            var items = await _context.BasketItems
+                .Where(x => x.CustomerBasketId == basketId)
+                .ToListAsync();
+
+            int orderPrice = 0;
+            foreach(var item in items)
             {
-                totalPrice += item.TotalPrice;
+                orderPrice += item.TotalPrice;
             }
 
-            var order = new Order(orderDto.UserId, totalPrice);
+            var order = new Order(userId, orderPrice);
             var orderItems = new List<OrderItem>();
-            foreach(var item in orderItemDtos)
+            foreach(var item in items)
             {
-                orderItems.Add(new OrderItem(item.Name, item.UnitPrice, item.Quantity, item.TotalPrice, order.Id));
+                orderItems.Add(new OrderItem(item.CatalogItemId, item.UnitPrice, item.Quantity, item.TotalPrice, order.Id));
             }
 
             await _context.Orders.AddAsync(order);
             _context.OrderItems.AddRange(orderItems);
+            _context.BasketItems.RemoveRange(items);
             await _context.SaveChangesAsync();
-
+            
             return order;
         }
 
@@ -38,6 +46,7 @@ namespace eShop.Persistance.Services
         {
             var items = await _context.OrderItems
                 .Where(x => x.OrderId == orderId)
+                .AsNoTracking()
                 .ToListAsync();
 
             return items;
@@ -47,6 +56,7 @@ namespace eShop.Persistance.Services
         {
             var orders = await _context.Orders
                 .Where(x => x.UserId == userId)
+                .AsNoTracking()
                 .ToListAsync();
             return orders;
         }

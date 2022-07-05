@@ -60,14 +60,52 @@ namespace eShop.Persistance.Services
             return catalogType;
         }
 
-        public async Task<List<CatalogItem>> GetItemsAsync()
-            => await _context.CatalogItems.ToListAsync();
+        public async Task<List<CatalogDto>> GetItemsAsync(int pageSize, int pageIndex)
+        {
+            var items = await _context.CatalogItems
+                .Skip(pageSize * pageIndex)
+                .Take(pageSize)
+                .AsNoTracking()
+                .ToListAsync();
+            
+            var brands = await _context.CatalogBrands
+                .AsNoTracking()
+                .ToListAsync();
 
-        public async Task<List<CatalogBrand>> GetBrandsAsync()
-            => await _context.CatalogBrands.ToListAsync();
+            var types = await _context.CatalogTypes
+                .AsNoTracking()
+                .ToListAsync();
+            
+            var catalogItems = new List<CatalogDto>();
+            foreach (var item in items)
+            {
+                catalogItems.Add(
+                    new CatalogDto
+                    {
+                        BrandName = brands.SingleOrDefault(x => x.Id == item.CatalogBrandId).BrandName,
+                        Description = item.Description,
+                        ItemName = item.Name,
+                        Price = item.Price,
+                        TypeName = types.SingleOrDefault(x => x.Id == item.CatalogTypeId).TypeName
+                    });
+            }
 
-        public async Task<List<CatalogType>> GetTypesAsync()
-            => await _context.CatalogTypes.ToListAsync();
+            return catalogItems;
+        }
+
+        public async Task<CatalogDto> GetItemById(Guid id)
+        {
+            var entity = await _context.CatalogItems.FindAsync(id);
+            var catalogDto = new CatalogDto
+            {
+                Description = entity.Description,
+                ItemName = entity.Name,
+                Price = entity.Price,
+                BrandName = _context.CatalogBrands.Find(entity.CatalogBrandId).BrandName,
+                TypeName = _context.CatalogTypes.Find(entity.CatalogTypeId).TypeName
+            };
+            return catalogDto;
+        }
 
         public async Task<List<CatalogItem>> GetItemsByNameAsync(string name)
         {

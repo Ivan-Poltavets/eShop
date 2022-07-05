@@ -5,9 +5,9 @@ namespace eShop.Application.Interfaces
 {
     public interface IOrderService
     {
-        public Task<Order> CreateAsync(OrderDto orderDto, List<OrderItemDto> orderItemDtos);
-        public Task<List<Order>> GetOrdersAsync(Guid userId);
-        public Task<List<OrderItem>> GetOrderAsync(Guid orderId, Guid userId);
+        Task<Order> CreateAsync(Guid userId);
+        Task<List<Order>> GetOrdersAsync(Guid userId);
+        Task<List<OrderItem>> GetOrderAsync(Guid orderId, Guid userId);
         
     }
 }

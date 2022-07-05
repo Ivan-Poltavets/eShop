@@ -78,6 +78,7 @@ namespace eShop.Persistance.Services
             var basket = await GetBasketByIdAsync(userId);
             var items = await _context.BasketItems
                 .Where(x => x.CustomerBasketId == basket.Id)
+                .AsNoTracking()
                 .ToListAsync();
             return items;
         }

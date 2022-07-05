@@ -1,5 +1,6 @@
 ﻿using eShop.Application.Dto;
 using eShop.Application.Interfaces;
+using eShop.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,8 +33,8 @@ namespace eShop.API.Controllers
 
         [HttpGet]
         [Route("items")]
-        public async Task<IActionResult> GetAllBasketItems()
-            => Ok(await _basketService.GetBasketItemsAsync(UserId));
+        public async Task<ActionResult<List<BasketItem>>> GetAllBasketItems()
+            => await _basketService.GetBasketItemsAsync(UserId);
 
         [HttpDelete]
         [Route("items")]

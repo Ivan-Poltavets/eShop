@@ -5,16 +5,15 @@ namespace eShop.Application.Interfaces
 {
     public interface ICatalogService
     {
-        public Task<CatalogBrand> CreateBrandAsync(CatalogBrandDto catalogBrandDto);
-        public Task<CatalogType> CreateTypeAsync(CatalogTypeDto catalogTypeDto);
-        public Task<CatalogItem> CreateItemAsync(CreateCatalogItemDto catalogItemDto);
+        Task<CatalogBrand> CreateBrandAsync(CatalogBrandDto catalogBrandDto);
+        Task<CatalogType> CreateTypeAsync(CatalogTypeDto catalogTypeDto);
+        Task<CatalogItem> CreateItemAsync(CreateCatalogItemDto catalogItemDto);
 
-        public Task<List<CatalogItem>> GetItemsAsync();
-        public Task<List<CatalogBrand>> GetBrandsAsync();
-        public Task<List<CatalogType>> GetTypesAsync();
+        Task<List<CatalogDto>> GetItemsAsync(int pageSize, int pageIndex);
+        Task<CatalogDto> GetItemById(Guid id);
 
-        public Task<List<CatalogItem>> GetItemsByNameAsync(string name);
-        public Task<List<CatalogItem>> GetItemsByBrandAsync(string brandName);
-        public Task<List<CatalogItem>> GetItemsByTypeAsync(string typeName);
+        Task<List<CatalogItem>> GetItemsByNameAsync(string name);
+        Task<List<CatalogItem>> GetItemsByBrandAsync(string brandName);
+        Task<List<CatalogItem>> GetItemsByTypeAsync(string typeName);
     }
 }

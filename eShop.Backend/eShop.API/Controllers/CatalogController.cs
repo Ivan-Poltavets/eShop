@@ -1,5 +1,6 @@
 ﻿using eShop.Application.Dto;
 using eShop.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.API.Controllers
@@ -12,31 +13,17 @@ namespace eShop.API.Controllers
         private readonly ICatalogService _catalogService;
 
         public CatalogController(ICatalogService catalogService)
-        {
-            _catalogService = catalogService;
-        }
+            => _catalogService = catalogService;
 
         [HttpGet]
-        [Route("items")]
-        public async Task<IActionResult> Items()
-        {
-            return Ok(await _catalogService.GetItemsAsync());
-        }
+        public async Task<ActionResult<List<CatalogDto>>> GetCatalog(int pageSize = 10, int pageIndex = 0)
+            => await _catalogService.GetItemsAsync(pageSize, pageIndex);
 
-        [HttpGet]
-        [Route("brands")]
-        public async Task<IActionResult> Brands()
-        {
-            return Ok(await _catalogService.GetBrandsAsync());
-        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CatalogDto>> GetCatalogItemById(Guid id)
+            => await _catalogService.GetItemById(id);
 
-        [HttpGet]
-        [Route("types")]
-        public async Task<IActionResult> Types()
-        {
-            return Ok(await _catalogService.GetTypesAsync());
-        }
-
+        [Authorize]
         [HttpPost]
         [Route("brands")]
         public async Task<IActionResult> CreateBrand(CatalogBrandDto catalogBrandDto)
@@ -45,6 +32,7 @@ namespace eShop.API.Controllers
             return CreatedAtAction(nameof(CreateBrand), res);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("types")]
         public async Task<IActionResult> CreateType(CatalogTypeDto catalogTypeDto)
@@ -53,6 +41,7 @@ namespace eShop.API.Controllers
             return CreatedAtAction(nameof(CreateType), res);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("items")]
         public async Task<IActionResult> CreateItem(CreateCatalogItemDto catalogItemDto)
