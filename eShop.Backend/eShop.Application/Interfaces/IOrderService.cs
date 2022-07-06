@@ -1,5 +1,4 @@
-﻿using eShop.Application.Dto;
-using eShop.Domain.Entities;
+﻿using eShop.Domain.Entities;
 
 namespace eShop.Application.Interfaces
 {
@@ -8,6 +7,5 @@ namespace eShop.Application.Interfaces
         Task<Order> CreateAsync(Guid userId);
         Task<List<Order>> GetOrdersAsync(Guid userId);
         Task<List<OrderItem>> GetOrderAsync(Guid orderId, Guid userId);
-        
     }
 }

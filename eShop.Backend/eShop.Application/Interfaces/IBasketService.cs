@@ -1,5 +1,4 @@
-﻿using eShop.Application.Dto;
-using eShop.Domain.Entities;
+﻿using eShop.Domain.Entities;
 
 namespace eShop.Application.Interfaces
 {

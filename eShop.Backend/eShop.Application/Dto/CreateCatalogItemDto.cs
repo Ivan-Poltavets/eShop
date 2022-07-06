@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace eShop.Application.Dto
+﻿namespace eShop.Application.Dto
 {
     public class CreateCatalogItemDto
     {

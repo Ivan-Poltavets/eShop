@@ -23,7 +23,6 @@ namespace eShop.API.Controllers
         public async Task<ActionResult<CatalogDto>> GetCatalogItemById(Guid id)
             => await _catalogService.GetItemById(id);
 
-        [Authorize]
         [HttpPost]
         [Route("brands")]
         public async Task<IActionResult> CreateBrand(CatalogBrandDto catalogBrandDto)
@@ -32,7 +31,6 @@ namespace eShop.API.Controllers
             return CreatedAtAction(nameof(CreateBrand), res);
         }
 
-        [Authorize]
         [HttpPost]
         [Route("types")]
         public async Task<IActionResult> CreateType(CatalogTypeDto catalogTypeDto)
@@ -41,7 +39,6 @@ namespace eShop.API.Controllers
             return CreatedAtAction(nameof(CreateType), res);
         }
 
-        [Authorize]
         [HttpPost]
         [Route("items")]
         public async Task<IActionResult> CreateItem(CreateCatalogItemDto catalogItemDto)

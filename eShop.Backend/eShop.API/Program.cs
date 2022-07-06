@@ -3,9 +3,11 @@ using eShop.Persistance;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using eShop.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApplication();
 builder.Services.AddPersistance(builder.Configuration);
 builder.Services.AddControllers();
 
