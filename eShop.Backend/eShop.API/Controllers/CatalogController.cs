@@ -1,6 +1,6 @@
 ﻿using eShop.Application.Dto;
 using eShop.Application.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using eShop.Application.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.API.Controllers
@@ -27,6 +27,12 @@ namespace eShop.API.Controllers
         [Route("brands")]
         public async Task<IActionResult> CreateBrand(CatalogBrandDto catalogBrandDto)
         {
+            var validation = new CatalogBrandDtoValidator().Validate(catalogBrandDto);
+            if(validation.Errors.Count != 0)
+            {
+                return BadRequest($"Validation error {nameof(catalogBrandDto)}");
+            }
+
             var res = await _catalogService.CreateBrandAsync(catalogBrandDto);
             return CreatedAtAction(nameof(CreateBrand), res);
         }
@@ -35,6 +41,12 @@ namespace eShop.API.Controllers
         [Route("types")]
         public async Task<IActionResult> CreateType(CatalogTypeDto catalogTypeDto)
         {
+            var validation = new CatalogTypeDtoValidator().Validate(catalogTypeDto);
+            if (validation.Errors.Count != 0)
+            {
+                return BadRequest($"Validation error {nameof(catalogTypeDto)}");
+            }
+
             var res = await _catalogService.CreateTypeAsync(catalogTypeDto);
             return CreatedAtAction(nameof(CreateType), res);
         }
@@ -43,6 +55,12 @@ namespace eShop.API.Controllers
         [Route("items")]
         public async Task<IActionResult> CreateItem(CreateCatalogItemDto catalogItemDto)
         {
+            var validation = new CreateCatalogItemDtoValidator().Validate(catalogItemDto);
+            if (validation.Errors.Count != 0)
+            {
+                return BadRequest($"Validation error {nameof(catalogItemDto)}");
+            }
+
             var res = await _catalogService.CreateItemAsync(catalogItemDto);
             return CreatedAtAction(nameof(CreateItem), res);
         }
