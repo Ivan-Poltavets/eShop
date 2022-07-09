@@ -1,5 +1,4 @@
-﻿using eShop.Application.Behaviors;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace eShop.Application
@@ -9,7 +8,9 @@ namespace eShop.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services
-                .AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
+                .AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() })
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+                
             return services;
         }
     }

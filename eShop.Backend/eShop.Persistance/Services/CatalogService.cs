@@ -1,4 +1,5 @@
-﻿using eShop.Application.Dto;
+﻿using AutoMapper;
+using eShop.Application.Dto;
 using eShop.Application.Interfaces;
 using eShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -8,17 +9,15 @@ namespace eShop.Persistance.Services
     public class CatalogService : ICatalogService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CatalogService(ApplicationDbContext context) 
-            => _context = context;
+        public CatalogService(ApplicationDbContext context, IMapper mapper) 
+            => (_context, _mapper) = (context, mapper);
 
         public async Task<CatalogBrand> CreateBrandAsync(CatalogBrandDto catalogBrandDto)
         {
-            var catalogBrand = new CatalogBrand
-            {
-                Id = Guid.NewGuid(),
-                BrandName = catalogBrandDto.BrandName
-            };
+            var catalogBrand = _mapper.Map<CatalogBrandDto, CatalogBrand>(catalogBrandDto);
+
             await _context.CatalogBrands.AddAsync(catalogBrand);
             await _context.SaveChangesAsync();
             return catalogBrand;
@@ -26,22 +25,7 @@ namespace eShop.Persistance.Services
 
         public async Task<CatalogItem> CreateItemAsync(CreateCatalogItemDto catalogItemDto)
         {
-
-            var catalogBrand = FindBrandById(catalogItemDto.CatalogBrandId);
-            var catalogType = FindTypeById(catalogItemDto.CatalogTypeId);
-
-            var catalogItem = new CatalogItem
-            {
-                Id = Guid.NewGuid(),
-                Name = catalogItemDto.Name,
-                Description = catalogItemDto.Description,
-                Quantity = catalogItemDto.Quantity,
-                Price = catalogItemDto.Price,
-                CatalogBrandId = catalogItemDto.CatalogBrandId,
-                CatalogTypeId = catalogItemDto.CatalogTypeId,
-                CatalogBrand = catalogBrand,
-                CatalogType = catalogType
-            };
+            var catalogItem = _mapper.Map<CreateCatalogItemDto, CatalogItem>(catalogItemDto);
 
             await _context.CatalogItems.AddAsync(catalogItem);
             await _context.SaveChangesAsync();
@@ -50,11 +34,8 @@ namespace eShop.Persistance.Services
 
         public async Task<CatalogType> CreateTypeAsync(CatalogTypeDto catalogTypeDto)
         {
-            var catalogType = new CatalogType
-            {
-                Id = Guid.NewGuid(),
-                TypeName = catalogTypeDto.TypeName
-            };
+            var catalogType = _mapper.Map<CatalogTypeDto, CatalogType>(catalogTypeDto);
+
             await _context.CatalogTypes.AddAsync(catalogType);
             await _context.SaveChangesAsync();
             return catalogType;
@@ -96,14 +77,8 @@ namespace eShop.Persistance.Services
         public async Task<CatalogDto> GetItemById(Guid id)
         {
             var entity = await _context.CatalogItems.FindAsync(id);
-            var catalogDto = new CatalogDto
-            {
-                Description = entity.Description,
-                ItemName = entity.Name,
-                Price = entity.Price,
-                BrandName = _context.CatalogBrands.Find(entity.CatalogBrandId).BrandName,
-                TypeName = _context.CatalogTypes.Find(entity.CatalogTypeId).TypeName
-            };
+            var catalogDto = _mapper.Map<CatalogItem, CatalogDto>(entity);
+        
             return catalogDto;
         }
 
