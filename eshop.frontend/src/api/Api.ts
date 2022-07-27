@@ -1,6 +1,5 @@
 import {ClientBase} from "./Client-base";
 
-
 export class Client extends ClientBase {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -59,7 +58,7 @@ export class Client extends ClientBase {
     /**
      * @return Success
      */
-    getAllBasketItems(api_version: string): Promise<void> {
+    getAllBasketItems(api_version: string): Promise<BasketItem[]> {
         let url_ = this.baseUrl + "/api/Basket/items?";
         if (api_version === undefined || api_version === null)
             throw new Error("The parameter 'api_version' must be defined and cannot be null.");
@@ -70,6 +69,7 @@ export class Client extends ClientBase {
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Accept": "text/plain"
             }
         };
 
@@ -80,19 +80,21 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processGetAllBasketItems(response: Response): Promise<void> {
+    protected processGetAllBasketItems(response: Response): Promise<BasketItem[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
-                return;
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as BasketItem[];
+                return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
                 return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<BasketItem[]>(null as any);
     }
 
     /**
@@ -140,10 +142,20 @@ export class Client extends ClientBase {
     }
 
     /**
+     * @param pageSize (optional)
+     * @param pageIndex (optional)
      * @return Success
      */
-    items(api_version: string): Promise<void> {
-        let url_ = this.baseUrl + "/api/Catalog/items?";
+    getCatalog(pageSize: number | undefined, pageIndex: number | undefined, api_version: string): Promise<CatalogDto[]> {
+        let url_ = this.baseUrl + "/api/Catalog?";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (pageIndex === null)
+            throw new Error("The parameter 'pageIndex' cannot be null.");
+        else if (pageIndex !== undefined)
+            url_ += "pageIndex=" + encodeURIComponent("" + pageIndex) + "&";
         if (api_version === undefined || api_version === null)
             throw new Error("The parameter 'api_version' must be defined and cannot be null.");
         else
@@ -153,17 +165,153 @@ export class Client extends ClientBase {
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Accept": "text/plain"
             }
         };
 
         return this.transformOptions(options_).then(transformedOptions_ => {
             return this.http.fetch(url_, transformedOptions_);
         }).then((_response: Response) => {
-            return this.processItems(_response);
+            return this.processGetCatalog(_response);
         });
     }
 
-    protected processItems(response: Response): Promise<void> {
+    protected processGetCatalog(response: Response): Promise<CatalogDto[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as CatalogDto[];
+                return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<CatalogDto[]>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getCatalogItemById(id: string, api_version: string): Promise<CatalogDto> {
+        let url_ = this.baseUrl + "/api/Catalog/{id}?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        if (api_version === undefined || api_version === null)
+            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
+        else
+            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processGetCatalogItemById(_response);
+        });
+    }
+
+    protected processGetCatalogItemById(response: Response): Promise<CatalogDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as CatalogDto;
+                return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<CatalogDto>(null as any);
+    }
+
+    /**
+     * @param body (optional)
+     * @return Success
+     */
+    createBrand(api_version: string, body: CatalogBrandDto | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/api/Catalog/brands?";
+        if (api_version === undefined || api_version === null)
+            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
+        else
+            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processCreateBrand(_response);
+        });
+    }
+
+    protected processCreateBrand(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
+    }
+
+    /**
+     * @param body (optional)
+     * @return Success
+     */
+    createType(api_version: string, body: CatalogTypeDto | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/api/Catalog/types?";
+        if (api_version === undefined || api_version === null)
+            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
+        else
+            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processCreateType(_response);
+        });
+    }
+
+    protected processCreateType(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -225,173 +373,7 @@ export class Client extends ClientBase {
     /**
      * @return Success
      */
-    brands(api_version: string): Promise<void> {
-        let url_ = this.baseUrl + "/api/Catalog/brands?";
-        if (api_version === undefined || api_version === null)
-            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
-        else
-            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-            }
-        };
-
-        return this.transformOptions(options_).then(transformedOptions_ => {
-            return this.http.fetch(url_, transformedOptions_);
-        }).then((_response: Response) => {
-            return this.processBrands(_response);
-        });
-    }
-
-    protected processBrands(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-                return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @param body (optional)
-     * @return Success
-     */
-    createBrand(api_version: string, body: CatalogBrandDto | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/api/Catalog/brands?";
-        if (api_version === undefined || api_version === null)
-            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
-        else
-            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        };
-
-        return this.transformOptions(options_).then(transformedOptions_ => {
-            return this.http.fetch(url_, transformedOptions_);
-        }).then((_response: Response) => {
-            return this.processCreateBrand(_response);
-        });
-    }
-
-    protected processCreateBrand(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-                return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @return Success
-     */
-    types(api_version: string): Promise<void> {
-        let url_ = this.baseUrl + "/api/Catalog/types?";
-        if (api_version === undefined || api_version === null)
-            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
-        else
-            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-            }
-        };
-
-        return this.transformOptions(options_).then(transformedOptions_ => {
-            return this.http.fetch(url_, transformedOptions_);
-        }).then((_response: Response) => {
-            return this.processTypes(_response);
-        });
-    }
-
-    protected processTypes(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-                return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @param body (optional)
-     * @return Success
-     */
-    createType(api_version: string, body: CatalogTypeDto | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/api/Catalog/types?";
-        if (api_version === undefined || api_version === null)
-            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
-        else
-            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        };
-
-        return this.transformOptions(options_).then(transformedOptions_ => {
-            return this.http.fetch(url_, transformedOptions_);
-        }).then((_response: Response) => {
-            return this.processCreateType(_response);
-        });
-    }
-
-    protected processCreateType(response: Response): Promise<void> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-                return;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<void>(null as any);
-    }
-
-    /**
-     * @return Success
-     */
-    getOrders(api_version: string): Promise<void> {
+    getOrders(api_version: string): Promise<Order[]> {
         let url_ = this.baseUrl + "/api/Order/orders?";
         if (api_version === undefined || api_version === null)
             throw new Error("The parameter 'api_version' must be defined and cannot be null.");
@@ -402,6 +384,7 @@ export class Client extends ClientBase {
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Accept": "text/plain"
             }
         };
 
@@ -412,7 +395,48 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processGetOrders(response: Response): Promise<void> {
+    protected processGetOrders(response: Response): Promise<Order[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Order[];
+                return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Order[]>(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    createOrder(api_version: string): Promise<void> {
+        let url_ = this.baseUrl + "/api/Order/orders?";
+        if (api_version === undefined || api_version === null)
+            throw new Error("The parameter 'api_version' must be defined and cannot be null.");
+        else
+            url_ += "api-version=" + encodeURIComponent("" + api_version) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "POST",
+            headers: {
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processCreateOrder(_response);
+        });
+    }
+
+    protected processCreateOrder(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -430,7 +454,7 @@ export class Client extends ClientBase {
     /**
      * @return Success
      */
-    getOrder(id: string, api_version: string): Promise<void> {
+    getOrder(id: string, api_version: string): Promise<OrderItem[]> {
         let url_ = this.baseUrl + "/api/Order/orders/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -444,6 +468,7 @@ export class Client extends ClientBase {
         let options_: RequestInit = {
             method: "GET",
             headers: {
+                "Accept": "text/plain"
             }
         };
 
@@ -454,24 +479,44 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processGetOrder(response: Response): Promise<void> {
+    protected processGetOrder(response: Response): Promise<OrderItem[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
-                return;
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as OrderItem[];
+                return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
                 return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<OrderItem[]>(null as any);
     }
+}
+
+export interface BasketItem {
+    id?: string;
+    catalogItemId?: string;
+    unitPrice?: number;
+    quantity?: number;
+    totalPrice?: number;
+    customerBasketId?: string;
+    customerBasket?: CustomerBasket;
 }
 
 export interface CatalogBrandDto {
     brandName?: string | undefined;
+}
+
+export interface CatalogDto {
+    typeName?: string | undefined;
+    brandName?: string | undefined;
+    itemName?: string | undefined;
+    description?: string | undefined;
+    price?: number;
 }
 
 export interface CatalogTypeDto {
@@ -487,8 +532,29 @@ export interface CreateCatalogItemDto {
     catalogTypeId?: string;
 }
 
+export interface CustomerBasket {
+    id?: string;
+    userId?: string;
+    basketItems?: BasketItem[] | undefined;
+}
+
+export interface Order {
+    id?: string;
+    userId?: string;
+    totalPrice?: number;
+}
+
+export interface OrderItem {
+    id?: string;
+    catalogItemId?: string;
+    unitPrice?: number;
+    quantity?: number;
+    totalPrice?: number;
+    orderId?: string;
+}
+
 export class ApiException extends Error {
-    override message: string;
+    message: string;
     status: number;
     response: string;
     headers: { [key: string]: any; };

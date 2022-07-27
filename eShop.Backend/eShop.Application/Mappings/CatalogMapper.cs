@@ -7,9 +7,7 @@ namespace eShop.Application.Mappings
     {
         public CatalogMapper()
         {
-            CreateMap<CatalogItem, CatalogDto>()
-                .Include<CatalogBrand, CatalogDto>()
-                ;
+
         }
     }
 }
